@@ -1,0 +1,399 @@
+{
+    "meta": {
+        "apiVersion": "3.0.0", 
+        "name": "TA-ivanti-ism", 
+        "displayName": "TA for Ivanti ISM", 
+        "restRoot": "TA_ivanti_ism", 
+        "version": "1.0.1"
+    }, 
+    "pages": {
+        "inputs": {
+            "services": [
+                {
+                    "name": "ism_incidents_input", 
+                    "entity": [
+                        {
+                            "validators": [
+                                {
+                                    "pattern": "^[a-zA-Z]\\w*$", 
+                                    "type": "regex", 
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores."
+                                }, 
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of input name should be between 1 and 100", 
+                                    "type": "string", 
+                                    "maxLength": 100
+                                }
+                            ], 
+                            "field": "name", 
+                            "label": "Name", 
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter a unique name for the data input"
+                        }, 
+                        {
+                            "label": "Interval", 
+                            "field": "interval", 
+                            "help": "Time interval of input in seconds.", 
+                            "validators": [
+                                {
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$", 
+                                    "type": "regex", 
+                                    "errorMsg": "Interval must be an integer."
+                                }
+                            ], 
+                            "type": "text", 
+                            "required": true
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of index name should be between 1 and 80.", 
+                                    "type": "string", 
+                                    "maxLength": 80
+                                }
+                            ], 
+                            "options": {
+                                "blackList": "^_.*$", 
+                                "endpointUrl": "data/indexes", 
+                                "createSearchChoice": true
+                            }, 
+                            "label": "Index", 
+                            "defaultValue": "default", 
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "field": "index"
+                        }, 
+                        {
+                            "options": {
+                                "referenceName": "account"
+                            }, 
+                            "field": "global_account", 
+                            "label": "Global Account", 
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "help": ""
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192", 
+                                    "type": "string", 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "field": "parameters", 
+                            "label": "Parameters (URL encoded)", 
+                            "defaultValue": "%24filter%3DStatus%20eq%20%27Active%27%20or%20Status%20eq%20%27Logged%27", 
+                            "required": false, 
+                            "type": "text", 
+                            "help": ""
+                        }
+                    ], 
+                    "title": "ISM Incidents Input"
+                }, 
+                {
+                    "name": "ism_service_requests_input", 
+                    "entity": [
+                        {
+                            "validators": [
+                                {
+                                    "pattern": "^[a-zA-Z]\\w*$", 
+                                    "type": "regex", 
+                                    "errorMsg": "Input Name must start with a letter and followed by alphabetic letters, digits or underscores."
+                                }, 
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of input name should be between 1 and 100", 
+                                    "type": "string", 
+                                    "maxLength": 100
+                                }
+                            ], 
+                            "field": "name", 
+                            "label": "Name", 
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter a unique name for the data input"
+                        }, 
+                        {
+                            "label": "Interval", 
+                            "field": "interval", 
+                            "help": "Time interval of input in seconds.", 
+                            "validators": [
+                                {
+                                    "pattern": "^\\-[1-9]\\d*$|^\\d*$", 
+                                    "type": "regex", 
+                                    "errorMsg": "Interval must be an integer."
+                                }
+                            ], 
+                            "type": "text", 
+                            "required": true
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of index name should be between 1 and 80.", 
+                                    "type": "string", 
+                                    "maxLength": 80
+                                }
+                            ], 
+                            "options": {
+                                "blackList": "^_.*$", 
+                                "endpointUrl": "data/indexes", 
+                                "createSearchChoice": true
+                            }, 
+                            "label": "Index", 
+                            "defaultValue": "default", 
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "field": "index"
+                        }, 
+                        {
+                            "options": {
+                                "referenceName": "account"
+                            }, 
+                            "field": "global_account", 
+                            "label": "Global Account", 
+                            "required": true, 
+                            "type": "singleSelect", 
+                            "help": ""
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192", 
+                                    "type": "string", 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "field": "parameters", 
+                            "label": "Parameters (URL encoded)", 
+                            "defaultValue": "%24filter%3DStatus%20ne%20%27Fulfilled%27%20and%20Status%20ne%20%27Cancelled%27%20and%20Status%20ne%20%27Closed%27", 
+                            "required": false, 
+                            "type": "text", 
+                            "help": ""
+                        }
+                    ], 
+                    "title": "ISM Service Requests Input"
+                }
+            ], 
+            "title": "Inputs", 
+            "description": "Manage your data inputs", 
+            "table": {
+                "moreInfo": [
+                    {
+                        "field": "name", 
+                        "label": "Name"
+                    }, 
+                    {
+                        "field": "interval", 
+                        "label": "Interval"
+                    }, 
+                    {
+                        "field": "index", 
+                        "label": "Index"
+                    }, 
+                    {
+                        "field": "disabled", 
+                        "label": "Status"
+                    }, 
+                    {
+                        "field": "global_account", 
+                        "label": "Global Account"
+                    }, 
+                    {
+                        "field": "parameters", 
+                        "label": "Parameters (URL encoded)"
+                    }
+                ], 
+                "header": [
+                    {
+                        "field": "name", 
+                        "label": "Name"
+                    }, 
+                    {
+                        "field": "interval", 
+                        "label": "Interval"
+                    }, 
+                    {
+                        "field": "index", 
+                        "label": "Index"
+                    }, 
+                    {
+                        "field": "disabled", 
+                        "label": "Status"
+                    }
+                ], 
+                "actions": [
+                    "edit", 
+                    "enable", 
+                    "delete", 
+                    "clone"
+                ]
+            }
+        }, 
+        "configuration": {
+            "title": "Configuration", 
+            "description": "Set up your add-on", 
+            "tabs": [
+                {
+                    "name": "account", 
+                    "table": {
+                        "header": [
+                            {
+                                "field": "name", 
+                                "label": "Account name"
+                            }, 
+                            {
+                                "field": "username", 
+                                "label": "Username"
+                            }
+                        ], 
+                        "actions": [
+                            "edit", 
+                            "delete", 
+                            "clone"
+                        ]
+                    }, 
+                    "title": "Account", 
+                    "entity": [
+                        {
+                            "label": "Account name", 
+                            "field": "name", 
+                            "help": "Enter a unique name for this account.", 
+                            "validators": [
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of Account name should be between 1 and 50", 
+                                    "type": "string", 
+                                    "maxLength": 50
+                                }, 
+                                {
+                                    "pattern": "^[a-zA-Z]\\w*$", 
+                                    "type": "regex", 
+                                    "errorMsg": "Account name must start with a letter and followed by alphabetic letters, digits or underscores."
+                                }
+                            ], 
+                            "type": "text", 
+                            "required": true
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of username should be between 1 and 200", 
+                                    "type": "string", 
+                                    "maxLength": 200
+                                }
+                            ], 
+                            "options": {
+                                "placeholder": "Enter the username here"
+                            }, 
+                            "field": "username", 
+                            "label": "Username", 
+                            "required": true, 
+                            "type": "text", 
+                            "help": "Enter the username for this account."
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 1, 
+                                    "errorMsg": "Length of password should be between 1 and 8192", 
+                                    "type": "string", 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "label": "Password", 
+                            "field": "password", 
+                            "help": "Enter the password for this account.", 
+                            "encrypted": true, 
+                            "type": "text", 
+                            "required": true
+                        }
+                    ]
+                }, 
+                {
+                    "name": "logging", 
+                    "entity": [
+                        {
+                            "options": {
+                                "disableSearch": true, 
+                                "autoCompleteFields": [
+                                    {
+                                        "value": "DEBUG", 
+                                        "label": "DEBUG"
+                                    }, 
+                                    {
+                                        "value": "INFO", 
+                                        "label": "INFO"
+                                    }, 
+                                    {
+                                        "value": "WARNING", 
+                                        "label": "WARNING"
+                                    }, 
+                                    {
+                                        "value": "ERROR", 
+                                        "label": "ERROR"
+                                    }, 
+                                    {
+                                        "value": "CRITICAL", 
+                                        "label": "CRITICAL"
+                                    }
+                                ]
+                            }, 
+                            "defaultValue": "INFO", 
+                            "field": "loglevel", 
+                            "type": "singleSelect", 
+                            "label": "Log level"
+                        }
+                    ], 
+                    "title": "Logging"
+                }, 
+                {
+                    "name": "additional_parameters", 
+                    "entity": [
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192", 
+                                    "type": "string", 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "field": "role", 
+                            "label": "Role", 
+                            "defaultValue": "Admin", 
+                            "required": false, 
+                            "type": "text", 
+                            "help": ""
+                        }, 
+                        {
+                            "validators": [
+                                {
+                                    "minLength": 0, 
+                                    "errorMsg": "Max length of text input is 8192", 
+                                    "type": "string", 
+                                    "maxLength": 8192
+                                }
+                            ], 
+                            "field": "tenant", 
+                            "label": "Tenant", 
+                            "defaultValue": "", 
+                            "required": false, 
+                            "type": "text", 
+                            "help": "e.g. apacdemo1-try.saasitau.com"
+                        }
+                    ], 
+                    "title": "Add-on Settings"
+                }
+            ]
+        }
+    }
+}
