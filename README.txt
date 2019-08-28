@@ -1,7 +1,6 @@
 TA-ivanti-ism
 ----------------------------
-
-       Original Author: Greg Ford
+Original Author: Greg Ford
        Current maintainers: Greg Ford
        Version/Date: 1.0.2 / Aug 28, 2019
        Sourcetype: ivanti:ism:incident, ivanti:ism:servicereq
